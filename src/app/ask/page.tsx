@@ -1,13 +1,13 @@
 
 "use client";
 
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LawCard } from '@/components/LawCard';
 import { suggestRelevantLaws, type SuggestRelevantLawsOutput } from '@/ai/flows/suggest-relevant-laws';
-import { Loader2, AlertTriangle, Sparkles, InfoIcon as Info } from 'lucide-react'; // Renamed Info to InfoIcon to avoid conflict if Info is used as a var
+import { Loader2, AlertTriangle, Sparkles, InfoIcon as Info } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 export default function AskPage() {
@@ -16,6 +16,14 @@ export default function AskPage() {
   const [suggestions, setSuggestions] = useState<SuggestRelevantLawsOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,6 +42,8 @@ export default function AskPage() {
 
     try {
       const result = await suggestRelevantLaws({ legalQuestion });
+      if (!isMounted.current) return;
+
       if (result && result.suggestions) {
         setSuggestions(result);
         if(result.suggestions.length === 0) {
@@ -43,16 +53,15 @@ export default function AskPage() {
           });
         }
       } else {
-        // This case might indicate an issue with the AI flow not returning the expected structure
-        // or an empty/nullish result when it shouldn't.
         console.warn("Received an unexpected response structure from the AI:", result);
-        setSuggestions({ suggestions: [] }); // Ensure suggestions is not null to avoid breaking UI
+        setSuggestions({ suggestions: [] }); 
         toast({
             title: "No suggestions available",
             description: "The AI did not provide specific suggestions. This might be due to the query or an unexpected response.",
           });
       }
     } catch (e) {
+      if (!isMounted.current) return;
       console.error("Error fetching suggestions:", e);
       const errorMessage = e instanceof Error ? e.message : "An unknown error occurred.";
       setError(errorMessage);
@@ -62,7 +71,9 @@ export default function AskPage() {
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      if (isMounted.current) {
+        setIsLoading(false);
+      }
     }
   };
 
