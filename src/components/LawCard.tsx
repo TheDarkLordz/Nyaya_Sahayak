@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Scale, BookText } from "lucide-react"; 
 
@@ -23,10 +24,11 @@ export function LawCard({ lawName, advice }: LawCardProps) {
           <BookText className="h-5 w-5 text-muted-foreground mr-2 mt-1 shrink-0" />
           <div>
             <p className="text-sm font-semibold font-body text-foreground/90 mb-1">General Guidance:</p>
-            <p className="text-sm font-body text-foreground/80">{advice}</p>
+            <p className="text-sm font-body text-foreground/80 whitespace-pre-line">{advice}</p>
           </div>
         </div>
       </CardContent>
     </Card>
   );
 }
+
