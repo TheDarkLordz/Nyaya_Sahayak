@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Lightbulb, Info, PlayCircle } from "lucide-react";
+import { Lightbulb, Info } from "lucide-react";
 import Image from "next/image";
 
 export default function HomePage() {
@@ -26,9 +26,6 @@ export default function HomePage() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <PlayCircle className="w-20 h-20 text-white/80" />
-        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full pt-8">
