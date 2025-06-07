@@ -16,17 +16,7 @@ export default function HomePage() {
         </p>
       </header>
 
-      <div className="relative w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-2xl group">
-        <Image
-          src="https://storage.googleapis.com/projectx-assets/B2221621/B2221621_0_0.png"
-          alt="AI-powered guide to understanding Indian Law - an open book with circuits and city skyline."
-          fill={true}
-          style={{ objectFit: "cover" }}
-          className="transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-      </div>
+      {/* Image section removed */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full pt-8">
         <Link href="/ask" passHref>
