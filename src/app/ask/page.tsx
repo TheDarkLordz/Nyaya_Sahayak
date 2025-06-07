@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LawCard } from '@/components/LawCard';
 import { suggestRelevantLaws, type SuggestRelevantLawsOutput } from '@/ai/flows/suggest-relevant-laws';
-import { Loader2, AlertTriangle, Sparkles } from 'lucide-react';
+import { Loader2, AlertTriangle, Sparkles, Info } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 export default function AskPage() {
