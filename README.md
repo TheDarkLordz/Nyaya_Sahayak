@@ -1,6 +1,7 @@
 ---
 
-![Next.js](https://img.shields.io/badge/Next.js-14.0.0-blue?://img.shields.io/badge/License://img.shields.io/badge/Node.js-18%2B-brightgreen?logo.shields.io/badge/AI-Google](https://img.shields.io/badge/Deployed-Vercel-inform Style](https://img.shields.io/badge/Code%20Style-Prettier-blueviolet?logo=preaya Sahayak - 🇮🇳 Indian Law Advice Website
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+
 
 *AI-powered legal information for Indian law, built with Next.js and Google Genkit.*
 
