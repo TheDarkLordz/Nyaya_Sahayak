@@ -1,9 +1,10 @@
+
 "use client";
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Home, Lightbulb, Info, LogIn, UserPlus, LayoutDashboard } from 'lucide-react';
+import { Menu, Home, Lightbulb, Info } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -13,9 +14,6 @@ const navLinks = [
   { href: '/ask', label: 'Ask AI', icon: Lightbulb },
   { href: '/instructions', label: 'Instructions', icon: Info },
 ];
-
-// Placeholder for auth status
-const isAuthenticated = false; 
 
 export function Navbar() {
   const pathname = usePathname();
@@ -39,20 +37,6 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          {isAuthenticated ? (
-            <Link href="/dashboard" className={cn(commonLinkClasses, pathname === '/dashboard' && activeLinkClasses)}>
-              Dashboard
-            </Link>
-          ) : (
-            <>
-              <Link href="/auth/login" className={cn(commonLinkClasses, pathname === '/auth/login' && activeLinkClasses)}>
-                Login
-              </Link>
-              <Button asChild size="sm">
-                <Link href="/auth/register">Register</Link>
-              </Button>
-            </>
-          )}
         </nav>
 
         {/* Mobile Navigation */}
@@ -82,25 +66,6 @@ export function Navbar() {
                     <span>{link.label}</span>
                   </Link>
                 ))}
-                 {isAuthenticated ? (
-                    <Link href="/dashboard" className={cn("flex items-center space-x-2 rounded-md p-2 text-lg", commonLinkClasses, pathname === '/dashboard' && activeLinkClasses, pathname === '/dashboard' && "bg-accent text-accent-foreground")}>
-                      <LayoutDashboard className="h-5 w-5" />
-                      <span>Dashboard</span>
-                    </Link>
-                  ) : (
-                    <>
-                      <Link href="/auth/login" className={cn("flex items-center space-x-2 rounded-md p-2 text-lg", commonLinkClasses, pathname === '/auth/login' && activeLinkClasses, pathname === '/auth/login' && "bg-accent text-accent-foreground")}>
-                        <LogIn className="h-5 w-5" />
-                        <span>Login</span>
-                      </Link>
-                      <Button asChild className="w-full text-lg py-2">
-                        <Link href="/auth/register">
-                          <UserPlus className="mr-2 h-5 w-5" />
-                          Register
-                        </Link>
-                      </Button>
-                    </>
-                  )}
               </div>
             </SheetContent>
           </Sheet>

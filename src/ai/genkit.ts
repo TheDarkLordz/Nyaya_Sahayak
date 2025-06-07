@@ -1,7 +1,11 @@
 import {genkit} from 'genkit';
-import {googleAI} from '@genkit-ai/googleai';
+import {openRouter} from 'genkitx-openrouter';
 
 export const ai = genkit({
-  plugins: [googleAI()],
-  model: 'googleai/gemini-2.0-flash',
+  plugins: [
+    openRouter({
+      apiKey: process.env.OPENROUTER_API_KEY || '',
+    }),
+  ],
+  model: 'deepseek/deepseek-v3-0324', // Using DeepSeek V3 model from OpenRouter
 });
