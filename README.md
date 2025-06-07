@@ -1,60 +1,72 @@
 # Nyaya Sahayak - 🇮🇳 Indian Law Advice Website
 
-This is a Next.js application designed to provide AI-driven legal information based on Indian laws. Users can ask questions in natural language, and the AI will suggest potentially relevant legal sections.
+Welcome to the official documentation for **Nyaya Sahayak**, a Next.js application designed to provide AI-driven legal information based on Indian laws. This platform allows users to ask legal questions in natural language, and the AI suggests potentially relevant legal sections to assist with their queries.
 
-## Overview
+## Project Overview
 
-Nyaya Sahayak aims to make Indian legal information more accessible. It leverages AI to understand user queries and point towards relevant laws.
+Nyaya Sahayak is built with the mission of making Indian legal information more accessible to the general public. By leveraging artificial intelligence, the application interprets user queries and directs them to relevant laws and legal sections. This tool serves as an educational resource to help users better understand legal frameworks in India.
 
-**Note:** This application provides information for educational purposes only and is not a substitute for professional legal advice from a qualified lawyer.
+**Disclaimer**: The information provided by Nyaya Sahayak is for educational purposes only and should not be considered a substitute for professional legal advice from a qualified lawyer.
 
-## Tech Stack
+## Technology Stack
 
-- **Frontend**: [Next.js](https://nextjs.org/) (React-based framework)
-- **Backend/API**: Serverless Functions in Next.js (using Server Actions and Genkit flows)
-- **AI Integration**: Firebase Genkit with Google AI models
+- **Frontend**: Next.js (a React-based framework for building modern web applications)
+- **Backend/API**: Serverless Functions integrated within Next.js, utilizing Server Actions and Genkit flows for seamless API operations
+- **AI Integration**: Firebase Genkit paired with Google AI models to power intelligent legal suggestions
 
-## Getting Started
+## Getting Started with Development
 
-To get started with development:
+Follow these steps to set up and run the Nyaya Sahayak project locally for development purposes:
 
-1.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+- **Install Dependencies**: Open your terminal, navigate to the project directory, and run the following command to install the required packages:
+  ```bash
+  npm install
+  ```
 
-2.  **Set up environment variables:**
-    Create a `.env.local` file if needed for API keys or other configurations (e.g., for Genkit/Google AI).
+- **Set Up Environment Variables**: Create a `.env.local` file in the root directory of the project to store API keys or other configurations necessary for Genkit or Google AI integration.
 
-3.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
-    This will start the Next.js application, typically on `http://localhost:9002`.
+- **Run the Development Server**: Start the Next.js application with the following command. By default, it will run on `http://localhost:9002`:
+  ```bash
+  npm run dev
+  ```
 
-4.  **Run Genkit (if developing AI flows):**
-    If you are modifying or testing Genkit flows locally, you might need to run:
+- **Run Genkit for AI Flow Development**: If you are working on or testing Genkit flows locally, use one of these commands:
+  - For a one-time run:
     ```bash
     npm run genkit:dev
     ```
-    Or for watching changes:
+  - For continuous watching of changes:
     ```bash
     npm run genkit:watch
     ```
 
 ## Core Features
 
--   **AI Law Suggestion Tool**: Users can input a legal question in natural language, and the AI suggests relevant Indian laws.
--   **Instructions Page**: Provides information on how the application works and a disclaimer.
+- **AI Law Suggestion Tool**: A user-friendly interface where individuals can input legal questions in natural language. The AI processes these queries and suggests relevant Indian laws or legal sections.
+- **Instructions Page**: An informational section that explains how the application works and includes a disclaimer about the educational nature of the tool.
 
-## Project Structure Highlights
+## Project Structure
 
--   `src/app/`: Contains the pages and layouts for the App Router.
-    -   `src/app/ask/page.tsx`: The AI-powered legal question page.
-    -   `src/app/instructions/page.tsx`: Informational page.
--   `src/components/`: Reusable UI components.
--   `src/ai/flows/`: Contains Genkit AI flows, like `suggest-relevant-laws.ts`.
--   `src/app/globals.css`: Global styles and Tailwind CSS theme customizations.
--   `tailwind.config.ts`: Tailwind CSS configuration.
+The codebase for Nyaya Sahayak is organized as follows to ensure clarity and maintainability:
 
-To explore the application, navigate to the home page after starting the development server.
+- `src/app/`: Contains the main pages and layouts using Next.js App Router.
+  - `src/app/ask/page.tsx`: The primary page for the AI-powered legal question tool.
+  - `src/app/instructions/page.tsx`: The page providing instructions and disclaimers.
+- `src/components/`: Houses reusable UI components used across the application.
+- `src/ai/flows/`: Includes Genkit AI flows, such as `suggest-relevant-laws.ts`, which powers the legal suggestion functionality.
+- `src/app/globals.css`: Defines global styles and customizations for the Tailwind CSS theme.
+- `tailwind.config.ts`: Configuration file for Tailwind CSS, used for styling the application.
+
+## Exploring the Application
+
+Once the development server is running, navigate to the home page (typically `http://localhost:9002`) in your browser to interact with Nyaya Sahayak. From there, you can access the AI suggestion tool or read through the instructions for more information on how to use the platform.
+
+## Contributing
+
+We welcome contributions to improve Nyaya Sahayak. If you’re interested in contributing, please fork the repository, make your changes, and submit a pull request. Ensure that your code adheres to the project’s structure and coding standards.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file in the repository for more details.
+
+Thank you for exploring Nyaya Sahayak. We hope this tool serves as a valuable resource in making Indian legal information more accessible to everyone.
