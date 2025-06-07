@@ -1,110 +1,85 @@
-# Nyaya Sahayak - 🇮🇳 Indian Law Advice Website
+---
 
-Welcome to the official documentation for **Nyaya Sahayak**, a Next.js application designed to provide AI-driven legal information based on Indian laws. This platform allows users to ask legal questions in natural language, and the AI suggests potentially relevant legal sections to assist with their queries.
+![Next.js](https://img.shields.io/badge/Next.js-14.0.0-blue?://img.shields.io/badge/License://img.shields.io/badge/Node.js-18%2B-brightgreen?logo.shields.io/badge/AI-Google](https://img.shields.io/badge/Deployed-Vercel-inform Style](https://img.shields.io/badge/Code%20Style-Prettier-blueviolet?logo=preaya Sahayak - 🇮🇳 Indian Law Advice Website
 
-## Project Overview
+*AI-powered legal information for Indian law, built with Next.js and Google Genkit.*
 
-Nyaya Sahayak is built with the mission of making Indian legal information more accessible to the general public. By leveraging artificial intelligence, the application interprets user queries and directs them to relevant laws and legal sections. This tool serves as an educational resource to help users better understand legal frameworks in India.
+---
 
-**Disclaimer**: The information provided by Nyaya Sahayak is for educational purposes only and should not be considered a substitute for professional legal advice from a qualified lawyer.
+## Table of Contents
 
-## Technology Stack
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Project Index](#project-index)
+- [Roadmap](#roadmap)
+- [Contribution](#contribution)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
-- **Frontend**: Next.js (a React-based framework for building modern web applications)
-- **Backend/API**: Serverless Functions integrated within Next.js, utilizing Server Actions and Genkit flows for seamless API operations
-- **AI Integration**: Firebase Genkit paired with Google AI models to power intelligent legal suggestions
-
-## Getting Started with Development
-
-Follow these steps to set up and run the Nyaya Sahayak project locally for development purposes:
-
-- **Install Dependencies**: Open your terminal, navigate to the project directory, and run the following command to install the required packages:
-  ```bash
-  npm install
-  ```
-
-- **Set Up Environment Variables**: Create a `.env.local` file in the root directory of the project to store API keys or other configurations necessary for Genkit or Google AI integration.
-
-- **Run the Development Server**: Start the Next.js application with the following command. By default, it will run on `http://localhost:9002`:
-  ```bash
-  npm run dev
-  ```
-
-- **Run Genkit for AI Flow Development**: If you are working on or testing Genkit flows locally, use one of these commands:
-  - For a one-time run:
-    ```bash
-    npm run genkit:dev
-    ```
-  - For continuous watching of changes:
-    ```bash
-    npm run genkit:watch
-    ```
+---
 
 ## Features
 
-Nyaya Sahayak offers a range of features designed to make legal information accessible and user-friendly:
-
-- **AI Law Suggestion Tool**: A core feature where users can input legal questions in natural language, and the AI processes these queries to suggest relevant Indian laws or legal sections.
-- **Instructions Page**: An informational section that explains how the application works and includes a disclaimer about the educational nature of the tool.
-- **Responsive Design**: Built with Tailwind CSS, the application ensures a seamless experience across devices, from mobile phones to desktops.
-- **Fast and Scalable**: Leveraging Next.js, the app provides optimized performance with server-side rendering and static site generation capabilities.
+- **AI Law Suggestion Tool**: Enter legal questions in natural language and receive relevant Indian law sections.
+- **Instructions Page**: Clear guidance on usage and disclaimers.
+- **Responsive UI**: Built with Tailwind CSS for seamless experience on all devices.
+- **Serverless & Fast**: Powered by Next.js serverless functions and Genkit flows.
+- **Educational Resource**: Designed for informational purposes, not as a legal substitute.
 
 ## Project Structure
 
-The codebase for Nyaya Sahayak is organized to ensure clarity and maintainability. Below is an overview of the key directories and files:
-
-- `src/app/`: Contains the main pages and layouts using Next.js App Router.
-  - `src/app/ask/page.tsx`: The primary page for the AI-powered legal question tool.
-  - `src/app/instructions/page.tsx`: The page providing instructions and disclaimers.
-- `src/components/`: Houses reusable UI components used across the application.
-- `src/ai/flows/`: Includes Genkit AI flows, such as `suggest-relevant-laws.ts`, which powers the legal suggestion functionality.
-- `src/app/globals.css`: Defines global styles and customizations for the Tailwind CSS theme.
-- `tailwind.config.ts`: Configuration file for Tailwind CSS, used for styling the application.
+```
+src/
+├── app/
+│   ├── ask/page.tsx           # AI-powered legal question page
+│   ├── instructions/page.tsx  # Instructions and disclaimer
+│   └── globals.css            # Global styles and Tailwind customizations
+├── components/                # Reusable UI components
+├── ai/flows/                  # Genkit AI flows (e.g., suggest-relevant-laws.ts)
+tailwind.config.ts             # Tailwind CSS configuration
+.env.local                     # Environment variables (not committed)
+```
 
 ## Project Index
 
-For quick navigation through the repository, here’s a structured index of the project’s key components:
-
-- **Home**: Entry point of the application (`src/app/page.tsx`)
-- **Ask Page**: AI-driven legal query tool (`src/app/ask/page.tsx`)
-- **Instructions**: Informational page with disclaimers (`src/app/instructions/page.tsx`)
-- **Components**: Reusable UI elements (`src/components/`)
-- **AI Flows**: Logic for legal suggestions (`src/ai/flows/`)
-- **Styles**: Global styling and themes (`src/app/globals.css`)
-- **Configuration**: Tailwind and other settings (`tailwind.config.ts`, `.env.local`)
+| Section            | Path/Description                           |
+|--------------------|--------------------------------------------|
+| Home               | `/` (Landing page)                         |
+| Ask                | `/ask` (AI law suggestion tool)            |
+| Instructions       | `/instructions` (How to use, disclaimer)   |
+| Components         | `src/components/` (UI components)          |
+| AI Flows           | `src/ai/flows/` (Genkit AI logic)          |
+| Styles             | `src/app/globals.css`                      |
+| Tailwind Config    | `tailwind.config.ts`                       |
 
 ## Roadmap
 
-We are committed to continuously improving Nyaya Sahayak. Here’s a glimpse of our planned features and enhancements:
-
-- **Multilingual Support**: Adding support for regional Indian languages to make the tool accessible to a broader audience.
-- **Expanded Legal Database**: Incorporating a wider range of Indian laws and case studies for more comprehensive suggestions.
-- **User Feedback System**: Implementing a feature for users to provide feedback on AI suggestions to improve accuracy.
-- **Mobile App**: Developing a dedicated mobile application for easier access on the go.
-- **Community Forum**: Creating a space for users to discuss legal queries and share insights.
+- [ ] **Multilingual Support**: Add regional language support.
+- [ ] **Expanded Legal Database**: Cover more Indian laws and case studies.
+- [ ] **User Feedback**: Collect feedback to improve AI accuracy.
+- [ ] **Mobile App**: Develop a mobile version.
+- [ ] **Community Forum**: Enable user discussions and Q&A.
 
 ## Contribution
 
-We welcome contributions from the community to enhance Nyaya Sahayak. If you’re interested in contributing, please follow these steps:
+We welcome contributions!  
+To contribute:
 
-1. **Fork the Repository**: Create your own fork of the project on GitHub.
-2. **Make Changes**: Implement your features or bug fixes in your forked repository.
-3. **Submit a Pull Request**: Once your changes are ready, submit a pull request to the main repository for review.
-4. **Code Standards**: Ensure your code adheres to the project’s structure, follows ESLint rules (if applicable), and includes relevant documentation.
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a Pull Request.
 
-For major changes or feature suggestions, please open an issue first to discuss your ideas with the maintainers.
+Please follow code style conventions and add documentation where necessary.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file in the repository for more details. You are free to use, modify, and distribute this software as per the terms of the license.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
-We would like to express our gratitude to the following:
-
-- **Next.js Team**: For providing an excellent framework that powers the frontend and backend of Nyaya Sahayak.
-- **Firebase Genkit & Google AI**: For enabling the AI capabilities that drive our legal suggestion tool.
-- **Open Source Community**: For the inspiration, tools, and libraries that have made this project possible.
-- **Contributors**: To everyone who has contributed code, ideas, or feedback to improve Nyaya Sahayak.
-
-Thank you for exploring Nyaya Sahayak. We hope this tool serves as a valuable resource in making Indian legal information more accessible to everyone. If you have any questions or suggestions, feel free to reach out or open an issue on GitHub!
+- **Next.js** for the robust React framework.
+- **Firebase Genkit & Google AI** for powering the AI backend.
+- **Shields.io** for badge generation.
+- All contributors and the open-source community.
