@@ -16,6 +16,10 @@ const SuggestRelevantLawsInputSchema = z.object({
   legalQuestion: z
     .string()
     .describe('The legal question in natural language.'),
+  customSystemPrompt: z
+    .string()
+    .optional()
+    .describe('An optional custom system prompt to override the default.'),
 });
 export type SuggestRelevantLawsInput = z.infer<
   typeof SuggestRelevantLawsInputSchema
@@ -43,20 +47,7 @@ const openRouterClient = new OpenAI({
 const SITE_URL = process.env.SITE_URL || "https://nyayasahayak.example.com";
 const SITE_NAME = process.env.SITE_NAME || "Nyaya Sahayak";
 
-export async function suggestRelevantLaws(
-  input: SuggestRelevantLawsInput
-): Promise<SuggestRelevantLawsOutput> {
-  return suggestRelevantLawsFlow(input);
-}
-
-const suggestRelevantLawsFlow = ai.defineFlow(
-  {
-    name: 'suggestRelevantLawsFlow',
-    inputSchema: SuggestRelevantLawsInputSchema,
-    outputSchema: SuggestRelevantLawsOutputSchema,
-  },
-  async (input: SuggestRelevantLawsInput): Promise<SuggestRelevantLawsOutput> => {
-    const systemPrompt = `You are an AI legal assistant specializing in Indian law. Your role is to help users understand potential legal avenues related to their questions by suggesting relevant laws and providing general guidance.
+const defaultSystemPrompt = `You are an AI legal assistant specializing in Indian law. Your role is to help users understand potential legal avenues related to their questions by suggesting relevant laws and providing general guidance.
 
 Based on the user's legal question, provide a list of potentially relevant Indian laws or legal sections. For each law or section you suggest, also provide practical, general advice or guidance on what steps the user might consider in relation to that law and their specific situation. This guidance should be for informational purposes only and not constitute specific legal advice.
 
@@ -72,15 +63,30 @@ Your response MUST be a valid JSON object conforming to this structure:
 If no specific laws are found, return an empty array for "suggestions", like so: {"suggestions": []}.
 Do not include any explanatory text before or after the JSON object itself. Ensure the entire output is a single JSON object.`;
 
+export async function suggestRelevantLaws(
+  input: SuggestRelevantLawsInput
+): Promise<SuggestRelevantLawsOutput> {
+  return suggestRelevantLawsFlow(input);
+}
+
+const suggestRelevantLawsFlow = ai.defineFlow(
+  {
+    name: 'suggestRelevantLawsFlow',
+    inputSchema: SuggestRelevantLawsInputSchema,
+    outputSchema: SuggestRelevantLawsOutputSchema,
+  },
+  async (input: SuggestRelevantLawsInput): Promise<SuggestRelevantLawsOutput> => {
+    const systemPromptToUse = input.customSystemPrompt || defaultSystemPrompt;
+
     try {
       const completion = await openRouterClient.chat.completions.create({
         extra_headers: {
           "HTTP-Referer": SITE_URL,
           "X-Title": SITE_NAME,
         },
-        model: "deepseek/deepseek-r1:free",
+        model: "deepseek/deepseek-r1:free", // Specified model
         messages: [
-          { role: "system", content: systemPrompt },
+          { role: "system", content: systemPromptToUse },
           { role: "user", content: input.legalQuestion },
         ],
         response_format: { type: "json_object" },
@@ -100,6 +106,9 @@ Do not include any explanatory text before or after the JSON object itself. Ensu
           return validationResult.data;
         } else {
           console.error("OpenRouter response failed Zod validation:", validationResult.error.errors);
+          // Try to return the raw content if it looks somewhat like the expected structure,
+          // or at least provide a more informative error to the client if possible.
+          // For now, sticking to returning empty on Zod fail.
           return { suggestions: [] };
         }
       } catch (parseError) {
