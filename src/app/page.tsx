@@ -17,7 +17,7 @@ export default function HomePage() {
       </header>
 
       <div className="relative w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-2xl group">
-        <Image 
+        <Image
           src="https://storage.googleapis.com/projectx-assets/B2221621/B2221621_0_0.png"
           alt="AI-powered guide to understanding Indian Law - an open book with circuits and city skyline."
           fill={true}
@@ -33,8 +33,8 @@ export default function HomePage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full pt-8">
         <Link href="/ask" passHref>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="w-full py-8 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 group"
             variant="default"
           >
@@ -43,9 +43,9 @@ export default function HomePage() {
           </Button>
         </Link>
         <Link href="/instructions" passHref>
-          <Button 
-            size="lg" 
-            variant="outline" 
+          <Button
+            size="lg"
+            variant="outline"
             className="w-full py-8 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 group"
           >
             <Info className="mr-3 h-7 w-7 text-accent group-hover:animate-pulse" />
