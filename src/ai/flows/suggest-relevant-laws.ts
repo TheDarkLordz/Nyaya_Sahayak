@@ -2,9 +2,9 @@
 'use server';
 
 /**
- * @fileOverview A flow that suggests relevant Indian laws based on a user's legal question.
+ * @fileOverview A flow that suggests relevant Indian laws and provides general advice based on a user's legal question.
  *
- * - suggestRelevantLaws - A function that suggests relevant laws.
+ * - suggestRelevantLaws - A function that suggests relevant laws and advice.
  * - SuggestRelevantLawsInput - The input type for the suggestRelevantLaws function.
  * - SuggestRelevantLawsOutput - The return type for the suggestRelevantLaws function.
  */
@@ -21,10 +21,15 @@ export type SuggestRelevantLawsInput = z.infer<
   typeof SuggestRelevantLawsInputSchema
 >;
 
+const LawSuggestionItemSchema = z.object({
+  lawName: z.string().describe('The name or section of the relevant Indian law.'),
+  advice: z.string().describe('General guidance or potential steps to consider in relation to this law and the user\'s situation. This is not legal advice.'),
+});
+
 const SuggestRelevantLawsOutputSchema = z.object({
-  suggestedLaws: z
-    .array(z.string())
-    .describe('A list of potentially relevant Indian laws.'),
+  suggestions: z
+    .array(LawSuggestionItemSchema)
+    .describe('A list of suggested laws and corresponding general advice.'),
 });
 export type SuggestRelevantLawsOutput = z.infer<
   typeof SuggestRelevantLawsOutputSchema
@@ -40,13 +45,13 @@ const prompt = ai.definePrompt({
   name: 'suggestRelevantLawsPrompt',
   input: {schema: SuggestRelevantLawsInputSchema},
   output: {schema: SuggestRelevantLawsOutputSchema},
-  prompt: `You are an AI legal assistant specializing in Indian law.
+  prompt: `You are an AI legal assistant specializing in Indian law. Your role is to help users understand potential legal avenues related to their questions by suggesting relevant laws and providing general guidance.
 
-  Based on the user's legal question, suggest a list of potentially relevant Indian laws.
+Based on the user's legal question, provide a list of potentially relevant Indian laws or legal sections. For each law or section you suggest, also provide practical, general advice or guidance on what steps the user might consider in relation to that law and their specific situation. This guidance should be for informational purposes only and not constitute specific legal advice.
 
-  Question: {{{legalQuestion}}}
+Question: {{{legalQuestion}}}
 
-  Please provide the output as a JSON array of strings.`,
+Please provide the output as a JSON object containing a single key "suggestions". The value of "suggestions" should be an array of objects. Each object in the array must have two string properties: "lawName" (for the name/section of the law) and "advice" (for the general guidance). If no specific laws are found, return an empty array for "suggestions".`,
 });
 
 const suggestRelevantLawsFlow = ai.defineFlow(

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, type FormEvent } from 'react';
@@ -6,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LawCard } from '@/components/LawCard';
 import { suggestRelevantLaws, type SuggestRelevantLawsOutput } from '@/ai/flows/suggest-relevant-laws';
-import { Loader2, AlertTriangle, Sparkles, Info } from 'lucide-react';
+import { Loader2, AlertTriangle, Sparkles, InfoIcon as Info } from 'lucide-react'; // Renamed Info to InfoIcon to avoid conflict if Info is used as a var
 import { useToast } from "@/hooks/use-toast";
 
 export default function AskPage() {
@@ -33,16 +34,23 @@ export default function AskPage() {
 
     try {
       const result = await suggestRelevantLaws({ legalQuestion });
-      if (result && result.suggestedLaws) {
+      if (result && result.suggestions) {
         setSuggestions(result);
-        if(result.suggestedLaws.length === 0) {
+        if(result.suggestions.length === 0) {
           toast({
             title: "No specific laws found",
             description: "The AI couldn't pinpoint specific laws for your query. Try rephrasing or providing more details.",
           });
         }
       } else {
-        throw new Error("Received an invalid response from the AI.");
+        // This case might indicate an issue with the AI flow not returning the expected structure
+        // or an empty/nullish result when it shouldn't.
+        console.warn("Received an unexpected response structure from the AI:", result);
+        setSuggestions({ suggestions: [] }); // Ensure suggestions is not null to avoid breaking UI
+        toast({
+            title: "No suggestions available",
+            description: "The AI did not provide specific suggestions. This might be due to the query or an unexpected response.",
+          });
       }
     } catch (e) {
       console.error("Error fetching suggestions:", e);
@@ -67,7 +75,7 @@ export default function AskPage() {
             <CardTitle className="font-headline text-3xl">Ask the AI Legal Assistant</CardTitle>
           </div>
           <CardDescription className="text-primary-foreground/80 pt-1 font-body">
-            Describe your legal situation or question below. Our AI will suggest potentially relevant Indian laws or legal sections.
+            Describe your legal situation or question below. Our AI will suggest potentially relevant Indian laws or legal sections and provide general guidance.
           </CardDescription>
         </CardHeader>
         <CardContent className="p-6">
@@ -96,7 +104,7 @@ export default function AskPage() {
                   Getting Suggestions...
                 </>
               ) : (
-                "Suggest Relevant Laws"
+                "Suggest Relevant Laws & Guidance"
               )}
             </Button>
           </form>
@@ -115,26 +123,26 @@ export default function AskPage() {
         </Card>
       )}
 
-      {suggestions && suggestions.suggestedLaws.length > 0 && (
+      {suggestions && suggestions.suggestions.length > 0 && (
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="font-headline text-2xl flex items-center gap-2">
               <Sparkles className="h-6 w-6 text-accent" />
-              AI-Suggested Laws
+              AI-Suggested Laws & Guidance
             </CardTitle>
             <CardDescription className="font-body">
-              Based on your question, here are some potentially relevant laws. This is not legal advice.
+              Based on your question, here are some potentially relevant laws and general guidance. This is not legal advice.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {suggestions.suggestedLaws.map((law, index) => (
-              <LawCard key={index} lawName={law} />
+            {suggestions.suggestions.map((suggestion, index) => (
+              <LawCard key={index} lawName={suggestion.lawName} advice={suggestion.advice} />
             ))}
           </CardContent>
         </Card>
       )}
       
-      {suggestions && suggestions.suggestedLaws.length === 0 && !error && !isLoading && (
+      {suggestions && suggestions.suggestions.length === 0 && !error && !isLoading && (
          <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="font-headline text-2xl flex items-center gap-2">
@@ -144,13 +152,16 @@ export default function AskPage() {
           </CardHeader>
           <CardContent>
             <p className="font-body text-muted-foreground">
-              The AI could not identify specific laws based on your query. You might want to:
+              The AI could not identify specific laws or provide guidance based on your query. You might want to:
             </p>
             <ul className="list-disc list-inside font-body text-muted-foreground mt-2 space-y-1">
               <li>Rephrase your question.</li>
               <li>Provide more specific details.</li>
               <li>Broaden your query.</li>
             </ul>
+            <p className="font-body text-muted-foreground mt-3">
+              If the problem persists, the AI might be experiencing difficulties.
+            </p>
           </CardContent>
         </Card>
       )}
