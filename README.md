@@ -184,7 +184,3 @@ We extend our heartfelt thanks to the following for their contributions to Nyaya
 - **Open Source Community & Contributors**: To everyone who has provided code, feedback, or inspiration to improve Nyaya Sahayak.
 
 Thank you for exploring Nyaya Sahayak. We hope this tool becomes a valuable resource in making Indian legal information more accessible to all. If you have questions, suggestions, or wish to contribute, feel free to open an issue or reach out on GitHub!
-
-[1] https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white
-[2] https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34
-[3] https://img.shields.io/b
