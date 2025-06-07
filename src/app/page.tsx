@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Lightbulb, Info, PlayCircle } from "lucide-react";
@@ -20,9 +21,10 @@ export default function HomePage() {
           src="https://placehold.co/1280x720.png"
           alt="Legal gavel and books"
           data-ai-hint="legal justice"
-          layout="fill"
-          objectFit="cover"
+          fill={true}
+          style={{ objectFit: "cover" }}
           className="transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
+          priority // Added priority as it's likely LCP
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
